@@ -4,11 +4,11 @@ import { calculate, parseCalculationString } from '../utils/helpers';
 
 function Calculator() {
     const [result, setResult] = useState('0')
-    const [mode, setMode] = useState('normal')
+    const [mode, setMode] = useState('normal') // Just for show
     const [theme, setTheme] = useState('light')
+    const [negative, setNegative] = useState(false)
 
     const handleChange = ({target: {name, value}}) => {
-        console.log(name, value)
         switch (name) {
             case 'num':
                 return setResult(result+value)
@@ -32,6 +32,9 @@ function Calculator() {
             setResult('Error!!')
         } 
     }
+    const handleFlipValue = () => {
+        return setNegative(negative ? false: true)
+    }
 
   return (
     <div className="Calculator" style={{background: theme === 'light' ? '#fff' : '#000', height: '100vh'}}>
@@ -52,25 +55,25 @@ function Calculator() {
                 <input onClick={handleChange} type="button" name="operator" value="&radic;" className="global"/>
                 <input onClick={handleChange} type="button" name="operator" value="x&#178;" className="global"/>
                 <input onClick={handleChange} type="button" name="operator" value="%" className="global"/>
-                <input onClick={handleChange} type="button" name="operator" value="Flip Value" className="global"/>
+                <input onClick={handleFlipValue} type="button" name="" value={negative ? " +ve Value": "-ve"} className="global"/>
             </div>
         }
         <div className="second-row">
-          <input onClick={handleChange} type="button" name="num" value="7" className="global"/>
-          <input onClick={handleChange} type="button" name="num" value="8" className="global"/>
-          <input onClick={handleChange} type="button" name="num" value="9" className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-7": "7"} className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-8":"8"} className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-9":"9"} className="global"/>
           <input onClick={handleChange} type="button" name="operator" value="/" className="global"/>
         </div>
         <div className="third-row">
-          <input onClick={handleChange} type="button" name="num" value="4" className="global"/>
-          <input onClick={handleChange} type="button" name="num" value="5" className="global"/>
-          <input onClick={handleChange} type="button" name="num" value="6" className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-4":"4"} className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-5":"5"} className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-6":"6"} className="global"/>
           <input onClick={handleChange} type="button" name="operator" value="*" className="global"/>
         </div>
         <div className="fourth-row">
-          <input onClick={handleChange} type="button" name="num" value="1" className="global"/>
-          <input onClick={handleChange} type="button" name="num" value="2" className="global"/>
-          <input onClick={handleChange} type="button" name="num" value="3" className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-1": "1"} className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-2": "2"} className="global"/>
+          <input onClick={handleChange} type="button" name="num" value={negative ? "-3": "3"} className="global"/>
           <input onClick={handleChange} type="button" name="operator" value="-" className="global"/>
         </div>
         <div className="conflict">
